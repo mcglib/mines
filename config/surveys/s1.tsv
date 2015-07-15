@@ -1,0 +1,56 @@
+#SURVEY												
+id	status_id	weight	name	notes	begin_date	end_date	session_count	threshold	force_completion	show_thanks	thanks_redirect_after_seconds	created_at	updated_at
+s1	A	1	MINES 2015	MINES for Libraries: Measuring the Impact of Networked Electronic Resources	2015-09-01	2015-12-31	0	5	1	1	5			
+
+#QUESTIONS												
+id	survey_id	status_id	weight	question	notes	use_dropdown	allow_multiple_answers	allow_other_answer	created_at	updated_at		
+s1q1	s1	A	1	Are you a McGill University (If you are using this resource on behalf of someone else please answer as if you were that person.)		1	0	1				
+s1q2	s1	A	2	Are you affiliated with		1	0	1				
+s1q3	s1	A	3	Your location		1	0	0				
+s1q4	s1	A	4	Primary purpose today (select one)		1	0	0				
+s1q5	s1	A	5	Why did you choose this resource? (select as many as apply)		0	1	0				
+
+#ANSWERS												
+id	survey_question_id	status_id	weight	answer	notes	is_other	created_at	updated_at				
+s1q2a1	s1q2	A	1	Faculty of Agricultural and Environmental Sciences (including Schools of Dietetics, Human Nutrition)		0						
+s1q1a1	s1q1	A	1	Undergraduate student		0						
+s1q3a1	s1q3	A	1	Off campus		0						
+s1q4a1	s1q4	A	1	Coursework/assignment		0						
+s1q5a1	s1q5	A	1	Important resource in my field		0						
+s1q2a2	s1q2	A	2	Faculty of Arts (including Schools of Social Work, Information Studies)		0						
+s1q1a2	s1q1	A	2	Master’s student		0						
+s1q3a2	s1q3	A	2	On campus, in a library		0						
+s1q4a2	s1q4	A	2	Teaching		0						
+s1q5a2	s1q5	A	2	Reference or citation from another source		0						
+s1q2a3	s1q2	A	3	School of Continuing Studies		0						
+s1q1a3	s1q1	A	3	Doctoral student		0						
+s1q3a3	s1q3	A	3	On campus, not in a library		0						
+s1q4a3	s1q4	A	3	Sponsored (funded) research		0						
+s1q5a3	s1q5	A	3	Linked from the library catalogue		0						
+s1q2a4	s1q2	A	4	Faculty of Dentistry		0						
+s1q1a4	s1q1	A	4	Post-doctoral student/fellow		0						
+s1q3a4	s1q3	A	4	McGill-affiliated hospital		0						
+s1q4a4	s1q4	A	4	Thesis or dissertation		0						
+s1q5a4	s1q5	A	4	Linked from the course syllabus/reading list		0						
+s1q2a5	s1q2	A	5	Faculty of Education		0						
+s1q1a5	s1q1	A	5	Medical or dental resident		0						
+s1q4a5	s1q4	A	5	Patient care		0						
+s1q5a5	s1q5	A	5	Linked from an internet search, e.g., Google		0						
+s1q2a6	s1q2	A	6	Faculty of Engineering (including Schools of Architecture, Urban Planning)		0						
+s1q1a6	s1q1	A	6	Faculty/professor		0						
+s1q4a6	s1q4	A	6	Non-sponsored (non-funded) scholarly research		0						
+s1q5a6	s1q5	A	6	Recommended by a professor/colleague		0						
+s1q2a7	s1q2	A	7	Faculty of Law		0						
+s1q1a7	s1q1	A	7	Librarian or library staff		0						
+s1q4a7	s1q4	A	7	Other activities, including general interest		0						
+s1q5a7	s1q5	A	7	Recommended by a librarian		0						
+s1q2a8	s1q2	A	8	Desautels Faculty of Management		0						
+s1q1a8	s1q1	A	8	Research or administrative staff		0						
+s1q2a9	s1q2	A	9	Faculty of Medicine (including Schools of Nursing, Physical & Occupational Therapy, Communication Sciences & Disorders)		0						
+s1q1a9	s1q1	A	9	Other		1						
+s1q2a10	s1q2	A	10	Schulich School of Music		0						
+s1q2a11	s1q2	A	11	Faculty of Religious Studies		0						
+s1q2a12	s1q2	A	12	Faculty of Science (including School of Computer Science)		0						
+s1q2a13	s1q2	A	13	I’m from McGill, but not part of a faculty		0						
+s1q2a14	s1q2	A	14	I’m from another university		0						
+s1q2a15	s1q2	A	15	Other		1						

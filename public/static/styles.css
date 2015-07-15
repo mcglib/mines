@@ -1,0 +1,81 @@
+.messages {
+	border: thin solid brown;
+	margin: 5px;
+	padding: 5px;
+}
+
+.messages .message {
+	border: thin solid lime;
+	margin: 5px;
+	padding: 5px;
+}
+
+.survey {
+	border: thin solid gray;
+	margin: 5px;
+	padding: 5px;
+}
+
+.survey .survey-name {
+	border: thin solid orange;
+	margin: 5px;
+	padding: 5px;
+}
+
+.survey .survey-notes {
+	border: thin solid red;
+	margin: 5px;
+	padding: 5px;
+}
+
+.survey .questions {
+	border: thin solid purple;
+	margin: 5px;
+	padding: 5px;
+}
+
+.survey .questions .question{
+	border: thin solid pink;
+	margin: 5px;
+	padding: 5px;
+}
+
+.survey .questions .question .question-text {
+	border: thin solid green;
+	margin: 5px;
+	padding: 5px;
+}
+
+.survey .questions .question .answers {
+	border: thin solid yellow;
+	margin: 5px;
+	padding: 5px;
+}
+
+.survey .questions .question .answers .answer {
+	border: thin solid aliceblue;
+}
+
+.controls {
+	border: thin solid magenta;
+	margin: 5px;
+	padding: 5px;
+}
+
+.thank-you {
+	border: thin solid blue;
+	margin: 5px;
+	padding: 5px;
+}
+
+.thank-you-title {
+	border: thin solid red;
+	margin: 5px;
+	padding: 5px;
+}
+
+.thank-you-message {
+	border: thin solid green;
+	margin: 5px;
+	padding: 5px;
+}

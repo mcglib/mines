@@ -1,0 +1,35 @@
+<?php
+
+return array(
+	'<dev-hostname>' => array(
+		'admins' => array(
+			'<email-address>',
+		),
+		'dbms' => array(
+			'host' => '<host>',
+			'database' => '<database>',
+			'user' => '<user>',
+			'pass' => '<pass>',
+		),
+		'surveys' => array(
+			's1' => include('surveys/s1.php'),
+		),
+		'schema' => include('schema.php'),
+	),
+	'<prod-hostname>' => array(
+		'admins' => array(
+			'<email-address>',
+		),
+		'dbms' => array(
+			'host' => '<host>',
+			'database' => '<database>',
+			'user' => '<user>',
+			'pass' => '<pass>',
+		),
+		'surveys' => array(
+			's1' => include('surveys/s1.php'),
+		),
+		'schema' => include('schema.php'),
+	),
+);
+
