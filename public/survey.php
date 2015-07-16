@@ -34,7 +34,16 @@ if ($actions['cancel'] == @$_POST['cancel']){
 <script>
 	function display_other(select){
 		var other_selected = select.options[select.selectedIndex].getAttribute("data-is_other") == '1';
-		select.form[select.name + ':other'].style.display = other_selected ? 'inline-block' : 'none';
+		if (select.form[select.name + ':other']){
+			select.form[select.name + ':other'].style.display = other_selected ? 'inline-block' : 'none';
+		}
+	}
+
+	window.onload = function(){
+		var selects = document.getElementsByTagName('select');
+		for (var i = 0; i < selects.length; i++){
+			display_other(selects[i]);
+		}
 	}
 </script>
 <form method="post">
@@ -60,16 +69,24 @@ if ($actions['cancel'] == @$_POST['cancel']){
 					</div>
 					<div class="answers">
 						<?php if ($question->use_dropdown): ?>
-							<select name="<?php eko($question->id); ?>"<?php echo $question->allow_multiple_answers ? ' multiple' : ''; ?><?php echo $question->allow_other_answer ? ' onchange="display_other(this);"' : ''; ?>>
-								<?php foreach (answers($question) as $i => $answer): ?>
-									<?php if ($i == 0): ?>
-										<option value="" data-is_other="0"></option>
-									<?php endif; ?>
-									<option value="<?php eko($answer->id); ?>" data-is_other="<?php echo $answer->is_other; ?>"><?php eko($answer->answer); ?></option>
-								<?php endforeach; ?>
-							</select>
-							<?php if ($question->allow_other_answer): ?>
-								<input style="display:none;" type="textfield" name="<?php eko($question->id . ':other'); ?>" value="<?php eko(@$_POST[$question->id . ':other']); ?>"/> 
+							<?php if ($question->allow_multiple_answers): ?>
+								<select name="<?php eko($question->id); ?>" multiple>
+									<?php foreach (answers($question) as $i => $answer): ?>
+										<?php $checked = in_array($answer->id, @$_REQUEST[$question->id] ?: array()) ; ?>
+										<option value="<?php eko($answer->id); ?>" data-is_other="<?php echo $answer->is_other; ?>"<?php eko($checked ? ' selected' : ''); ?>><?php eko($answer->answer); ?></option>
+									<?php endforeach; ?>
+								</select>
+							<?php else: ?>
+								<select name="<?php eko($question->id); ?>"<?php echo $question->allow_other_answer ? ' onchange="display_other(this);"' : ''; ?>>
+									<option value="" data-is_other="0"></option>
+									<?php foreach (answers($question) as $i => $answer): ?>
+										<?php $checked = @$_POST[$question->id] == $answer->id; ?>
+										<option value="<?php eko($answer->id); ?>" data-is_other="<?php echo $answer->is_other; ?>"<?php eko($checked ? ' selected' : ''); ?>><?php eko($answer->answer); ?></option>
+									<?php endforeach; ?>
+								</select>
+								<?php if ($question->allow_other_answer): ?>
+									<input style="display:none;" type="textfield" name="<?php eko($question->id . ':other'); ?>" value="<?php eko(@$_POST[$question->id . ':other']); ?>"/> 
+								<?php endif; ?>
 							<?php endif; ?>
 						<?php else: ?>
 							<?php foreach (answers($question) as $answer): ?>
