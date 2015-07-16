@@ -66,12 +66,12 @@ if ($actions['cancel'] == @$_POST['cancel']){
 								<?php endforeach; ?>
 							</select>
 							<?php if ($question->allow_other_answer): ?>
-								<input style="display:none;" type="textfield" name="<?php eko($question->id . ':other'); ?>" value="<?php eko($_POST[$question->id . ':other']); ?>"/> 
+								<input style="display:none;" type="textfield" name="<?php eko($question->id . ':other'); ?>" value="<?php eko(@$_POST[$question->id . ':other']); ?>"/> 
 							<?php endif; ?>
 						<?php else: ?>
 							<?php foreach (answers($question) as $answer): ?>
 								<?php if ($question->allow_multiple_answers): ?>
-									<?php $checked = in_array($answer->id, @$_REQUEST[$question->id]) ; ?>
+									<?php $checked = in_array($answer->id, @$_REQUEST[$question->id] ?: array()) ; ?>
 									<input type="checkbox" name="<?php eko($question->id); ?>[]" value="<?php eko($answer->id); ?>"<?php eko($checked ? ' checked' : ''); ?>>
 								<?php else: ?>
 									<?php $checked = @$_POST[$question->id] == $answer->id; ?>
