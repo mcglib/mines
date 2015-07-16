@@ -182,20 +182,22 @@ function survey_submit($id, $args){
 	$def = $conf['surveys'][$id];
 
 	$messages = validate($args, $def['validators'], $def['validator-definitions']);
-/*
-	validate(array('url' args
-	$args['url']
-  $URL = filter_var($url, FILTER_SANITIZE_URL);
-  if( ! filter_var($URL,FILTER_VALIDATE_URL) ) {
-    $URL = DEFAULT_URL;
-  }
-*/
 
 	if (count($messages)) return $messages;
 
 	$result = db_exec($def['insert'], $def['insert-args']);
 
 	return array();
+}
+
+function survey_submissions($survey_id){
+	$conf = config();
+
+	$sql = $conf['surveys'][$survey_id]['select'];
+	$args = array($survey_id);
+	$query = db_exec($sql, $args);
+
+	return $query->fetchAll();
 }
 
 function survey_export($id){

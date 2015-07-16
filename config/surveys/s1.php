@@ -4,7 +4,7 @@ return array(
 	// Survey, questions, and answers.
 	'import' => 'config/surveys/s1.tsv',
 
-	// Custom CSS file
+	// Custom CSS file.
 	'css' => 'static/styles.css',
 
 	// SQL statements for survey submissions
@@ -76,6 +76,43 @@ return array(
 		's1q3' => array('answer', array('%s' => 3)),
 		's1q4' => array('answer', array('%s' => 4)),
 		's1q5' => array('answer', array('%s' => 5)),
+	),
+
+	// Define how each field is mapped to ARL report requirements
+	'arl-export' => array(
+		'TimeCreated' => function($row){
+			return $row->created_at;
+		},
+		'ResourceURL' => function($row){
+			return $row->url;
+		},
+		'IPAddress' => function($row){
+			return $row->ip;
+		},
+		'UserAgent' => function($row){
+			return $row->user_agent;
+		},
+		'UserGroup' => function($row){
+			return $row->s1q1;
+		},
+		'UserGroupOtherText' => function($row){
+			return $row->s1q1_other;
+		},
+		'Affiliation' => function($row){
+			return $row->s1q2;
+		},
+		'AffiliationOtherText' => function($row){
+			return $row->s1q2_other;
+		},
+		'Location' => function($row){
+			return $row->s1q3;
+		},
+		'Purpose' => function($row){
+			return $row->s1q4;
+		},
+		'Reason' => function($row){
+			return '"' . $row->s1q5 . '"';
+		},
 	),
 );
 
