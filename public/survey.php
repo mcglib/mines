@@ -61,7 +61,10 @@ if ($actions['cancel'] == @$_POST['cancel']){
 					<div class="answers">
 						<?php if ($question->use_dropdown): ?>
 							<select name="<?php eko($question->id); ?>"<?php echo $question->allow_multiple_answers ? ' multiple' : ''; ?><?php echo $question->allow_other_answer ? ' onchange="display_other(this);"' : ''; ?>>
-								<?php foreach (answers($question) as $answer): ?>
+								<?php foreach (answers($question) as $i => $answer): ?>
+									<?php if ($i == 0): ?>
+										<option value="" data-is_other="0"></option>
+									<?php endif; ?>
 									<option value="<?php eko($answer->id); ?>" data-is_other="<?php echo $answer->is_other; ?>"><?php eko($answer->answer); ?></option>
 								<?php endforeach; ?>
 							</select>

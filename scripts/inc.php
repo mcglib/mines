@@ -34,30 +34,15 @@ function globals_key($suffix){
 	return $key;
 }
 
-function validate($args, array $validators, array $definitions){
+function validate($args, array $validators){
 	$result = array();
 
-	foreach ($validators as $key => $validator){
-		list($type, $subs) = $validator;
-		list($regex, $message) = $definitions[$type];
-
-		$value = $args[$key];
-
-		if (is_array($value)){
-			foreach ($value as $sub_value){
-				if (!preg_match($regex, $sub_value)){
-					$result[$key] = strtr($message, $subs);
-				}
-			}
-		} else {
-			if (!preg_match($regex, $value)){
-				$result[$key] = strtr($message, $subs);
-			}
-		}
-
+	foreach ($validators as $key => $callback){
+		$value = @$args[$key];
+		$result[] = $callback($value, $args);
 	}
 
-	return $result;
+	return array_filter($result);
 }
 
 function today_is_between($begin_date, $end_date){
@@ -181,11 +166,16 @@ function survey_submit($id, $args){
 	$conf = config();
 	$def = $conf['surveys'][$id];
 
-	$messages = validate($args, $def['validators'], $def['validator-definitions']);
+	$messages = validate($args, $def['validators']);
 
 	if (count($messages)) return $messages;
 
-	$result = db_exec($def['insert'], $def['insert-args']);
+	$insert_args = array();
+	foreach ($def['insert-args'] as $callback){
+		$insert_args[] = $callback($args);
+	}
+
+	$result = db_exec($def['insert'], $insert_args);
 
 	return array();
 }

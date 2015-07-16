@@ -38,44 +38,92 @@ return array(
 		select * from s1
 	",
 
+	// Define how each submitted form value should be validated.
+	'validators' => array(
+		'id' => function($value, $args){
+			return preg_match('/^s\d+$/', $value) ? '' : 'Invalid id.';
+		},
+		'url' => function($value, $args){
+			return preg_match('/^https?:\/\/[a-zA-Z0-9].*/', $value) ? '' : 'Invalid URL.';
+		},
+		's1q1' => function($value, $args){
+			return preg_match('/^s\d+q\d+a\d+$/', $value) ? '' : 'Invalid answer for question 1.';
+		},
+		's1q1:other' => function($value, $args){
+			if (@$args['s1q1'] != 's1q1a9') return '';
+			return $value != '' ? '' : 'Please specify an other answer for question 1.';
+		},
+		's1q2' => function($value, $args){
+			return preg_match('/^s\d+q\d+a\d+$/', $value) ? '' : 'Invalid answer for question 2.';
+		},
+		's1q2:other' => function($value, $args){
+			if (@$args['s1q2'] != 's1q2a15') return '';
+			return $value != '' ? '' : 'Please specify an other answer for question 2.';
+		},
+		's1q3' => function($value, $args){
+			return preg_match('/^s\d+q\d+a\d+$/', $value) ? '' : 'Invalid answer for question 3.';
+		},
+		's1q4' => function($value, $args){
+			return preg_match('/^s\d+q\d+a\d+$/', $value) ? '' : 'Invalid answer for question 4.';
+		},
+		's1q5' => function($values, $args){
+			if (!is_array($values)){
+				return 'Invalid answer for question 5.';
+			}
+			foreach ($values as $value){
+				if (!preg_match('/^s\d+q\d+a\d+$/', $value)){
+					return 'Invalid answer for question 5.';
+				}
+			}
+			return '';
+		},
+	),
+
 	// Define the values that should be supplied to the prepared insert statement above.
 	// $args will contain submitted form data.
 	'insert-args' => array(
-		null,
-		'A',
-		@$args['s1q1'],
-		@$args['s1q1:other'],
-		@$args['s1q2'],
-		@$args['s1q2:other'],
-		@$args['s1q3'],
-		@$args['s1q4'],
-		implode(',', @$args['s1q5'] ?: array()),
-		@$args['url'],
-		@$_SERVER['REMOTE_ADDR'],
-		@$_SERVER['HTTP_USER_AGENT'],
-		date('Y-m-d H:i:s'),
-		date('Y-m-d H:i:s'),
-	),
-
-	// Define regex validators
-	'validator-definitions' => array(
-		'id' => array('/^s\d+$/', 'Invalid id.'),
-		'url' => array('/^https?:\/\/[a-zA-Z0-9].*/', 'Invalid URL.'),
-		'answer' => array('/^s\d+q\d+a\d+$/', 'Invalid answer for question %s.'),
-		'other-answer' => array('/^.*$/', 'Invalid other answer for question %s.'),
-	),
-
-	// Define how each submitted form value should be validated.
-	'validators' => array(
-		'id' => array('id', array()),
-		'url' => array('url', array()),
-		's1q1' => array('answer', array('%s' => 1)),
-		's1q1:other' => array('other-answer', array('%s' => 1)),
-		's1q2' => array('answer', array('%s' => 2)),
-		's1q2:other' => array('other-answer', array('%s' => 2)),
-		's1q3' => array('answer', array('%s' => 3)),
-		's1q4' => array('answer', array('%s' => 4)),
-		's1q5' => array('answer', array('%s' => 5)),
+		'id' => function($args){
+			return null;
+		},
+		'status_id' => function($args){
+			return 'A';
+		},
+		's1q1' => function($args){
+			return @$args['s1q1'];
+		},
+		's1q1_other' => function($args){
+			return @$args['s1q1:other'];
+		},
+		's1q2' => function($args){
+			return @$args['s1q2'];
+		},
+		's1q2_other' => function($args){
+			return @$args['s1q2:other'];
+		},
+		's1q3' => function($args){
+			return @$args['s1q3'];
+		},
+		's1q4' => function($args){
+			return @$args['s1q4'];
+		},
+		's1q5' => function($args){
+			return implode(',', @$args['s1q5'] ?: array());
+		},
+		'url' => function($args){
+			return @$args['url'];
+		},
+		'ip' => function($args){
+			return @$_SERVER['REMOTE_ADDR'];
+		},
+		'user_agent' => function($args){
+			return @$_SERVER['HTTP_USER_AGENT'];
+		},
+		'created_at' => function($args){
+			return date('Y-m-d H:i:s');
+		},
+		'updated_at' => function($args){
+			return date('Y-m-d H:i:s');
+		},
 	),
 
 	// Define how each field is mapped to ARL report requirements
