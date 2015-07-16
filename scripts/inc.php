@@ -1,6 +1,33 @@
 <?php
 
 // Helpers
+set_error_handler(function($severity, $message, $file, $line){
+    if (!(error_reporting() & $severity)) return; // This error code is not included in error_reporting
+
+    throw new ErrorException($message, 0, $severity, $file, $line);
+});
+
+set_exception_handler(function($exception){
+	$conf = config();
+
+	$exception_path = "/tmp/mines-exception." . $exception->getCode();
+
+	if ($conf['exception-email-once'] && file_exists($exception_path)) redirect_and_die(@$_REQUEST['url']);
+
+	$to = implode(', ', $conf['admins']);
+	$subject = $conf['exception-email']['subject'];
+	$message = strtr($conf['exception-email']['message'], array(
+		'%path' => $exception_path,
+		'%exception' => $exception->__toString(),
+	));
+
+	mail($to, $subject, $message);
+
+	file_put_contents($exception_path, $message);
+
+	redirect_and_die(@$_REQUEST['url']);
+});
+
 function globals_key($suffix){
 	$key = __DIR__ . '/' . __FILE__ . '.' . $suffix;
 
@@ -33,19 +60,15 @@ function validate($args, array $validators, array $definitions){
 	return $result;
 }
 
-function notify_admins(){
-	if (file_exists("tmp/error-$err_no.txt")) {
-		return;
-	} else {
-		if (fopen("tmp/error-$err_no.txt","w")) {
-/*
-			$error_message = "$err_no: $err_str"; 
-			fwrite($ef,$error_message, strlen($error_message));     
-			mail(ERROR_MSG_RECIPIENTS,"MINES survey error $err_no",$error_message."\nPlease delete mines/tmp/error-$err_no.txt after resolving the error.");
-			fclose($ef);
-*/
-		}
-	}
+function today_is_between($begin_date, $end_date){
+	$begin_date = str_replace('-', '', $begin_date);
+	$end_date = str_replace('-', '', $end_date);
+	$today = date('Ymd');
+
+	if ($begin_date && !$end_date) return $begin_date <= $today;
+	if (!$begin_date && $end_date) return $today <= $end_date;
+
+	return $begin_date <= $today && $today <= $end_date;
 }
 
 // Config
@@ -134,6 +157,24 @@ function answer_insert(array $args){
 	$conf = config();
 	$sql = $conf['schema']['survey_answer-insert'];
 	db_exec($sql, $args);
+}
+
+function survey_increment_count(stdClass $survey){
+	$survey->session_count++;
+
+	$conf = config();
+	$sql = $conf['schema']['survey-update-count'];
+	$args = array($survey->session_count, $survey->id);
+
+	db_exec($sql, $args);
+}
+
+function survey_is_presentable(stdClass $survey){
+	if ($survey->status_id != 'A') return false;
+	if (!today_is_between($survey->begin_date, $survey->end_date)) return false;
+	if ($survey->session_count % $survey->threshold != 0) return false;
+
+	return true;
 }
 
 function survey_submit($id, $args){

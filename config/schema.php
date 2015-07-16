@@ -49,6 +49,9 @@ return array(
 			(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		;
 	",
+	'survey-update-count' => "
+		update survey set session_count = ? where id = ?
+	",
 	'survey_question-create' => "
 		create table if not exists survey_question (
 			id varchar(16) primary key,

@@ -2,21 +2,39 @@
 
 return array(
 	'<dev-hostname>' => array(
+		'enabled' => true,
+		'begin_date' => '<begin_date>',
+		'end_date' => null,
 		'admins' => array(
 			'<email-address>',
 		),
+		'exception-email' => array(
+			'subject' => 'MINES Exception!',
+			'message' => "Please delete '%path' after resolving this exception.\n\n%exception",
+		),
+		'exception-email-once' => false,
 		'dbms' => array(
 			'host' => '<host>',
 			'database' => '<database>',
 			'user' => '<user>',
 			'pass' => '<pass>',
 		),
+		'schema' => include('schema.php'),
 		'surveys' => array(
 			's1' => include('surveys/s1.php'),
 		),
-		'schema' => include('schema.php'),
+		'default-survey-id' => 's1',
+		'default-redirect-url' => 'http://www.mcgill.ca',
 	),
 	'<prod-hostname>' => array(
+		'enabled' => true,
+		'begin_date' => '2015-07-01',
+		'end_date' => null,
+		'exception-email' => array(
+			'subject' => 'MINES Exception!',
+			'message' => "Please delete '%path' after resolving this exception.\n\n%exception",
+		),
+		'exception-email-once' => false,
 		'admins' => array(
 			'<email-address>',
 		),
@@ -26,10 +44,12 @@ return array(
 			'user' => '<user>',
 			'pass' => '<pass>',
 		),
+		'schema' => include('schema.php'),
 		'surveys' => array(
 			's1' => include('surveys/s1.php'),
 		),
-		'schema' => include('schema.php'),
+		'default-survey-id' => 's1',
+		'default-redirect-url' => 'http://www.mcgill.ca',
 	),
 );
 
