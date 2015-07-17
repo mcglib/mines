@@ -205,7 +205,7 @@ function survey_submit($survey_id, $args){
 function survey_submissions($survey_id){
 	$conf = config();
 
-	$sql = $conf['surveys'][$survey_id]['select'];
+	$sql = survey_config($survey_id, 'select');
 	$args = array($survey_id);
 	$query = db_exec($sql, $args);
 

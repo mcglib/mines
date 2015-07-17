@@ -13,7 +13,7 @@ $conf = config();
 
 $survey_id = $argv[1];
 
-$fields = $conf['surveys'][$survey_id]['arl-export'];
+$fields = survey_config($survey_id, 'arl-export');
 
 echo implode(",", array_keys($fields)) . "\n";
 foreach (survey_submissions($survey_id) as $survey_submission){
