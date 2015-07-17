@@ -50,8 +50,12 @@ if ($actions['cancel'] == @$_POST['cancel']){
 	<input type="hidden" name="id" value="<?php eko(@$_REQUEST['id']); ?>" />
 	<input type="hidden" name="url" value="<?php eko(@$_REQUEST['url']); ?>" />
 	<div class="survey">
-		<div class="survey-name"><?php eko($survey->name); ?></div>
-		<div class="survey-notes"><?php eko($survey->notes); ?></div>
+		<div class="survey-name">
+			<?php eko($survey->name); ?>
+		</div>
+		<div class="survey-notes">
+			<?php eko($survey->notes); ?>
+		</div>
 		<?php if (count($messages)): ?>
 			<div class="messages">
 				<ul >
@@ -66,6 +70,9 @@ if ($actions['cancel'] == @$_POST['cancel']){
 				<div class="question">
 					<div class="question-text">
 						<?php eko($question->question); ?>:
+					</div>
+					<div class="question-notes">
+						<?php eko($question->notes); ?>
 					</div>
 					<div class="answers">
 						<?php if ($question->use_dropdown): ?>
@@ -97,7 +104,11 @@ if ($actions['cancel'] == @$_POST['cancel']){
 									<?php $checked = @$_POST[$question->id] == $answer->id; ?>
 									<input type="radio" name="<?php eko($question->id); ?>" value="<?php eko($answer->id); ?>"<?php eko($checked ? ' checked' : ''); ?>>
 								<?php endif; ?>
-								<?php eko($answer->answer); ?>
+								<?php if ($answer->notes): ?>
+									<a href='javascript:alert("<?php str_replace("\"", "'", eko($answer->notes)); ?>");'><?php eko($answer->answer); ?></a>
+								<?php else: ?>
+									<?php eko($answer->answer); ?>
+								<?php endif; ?>
 								<?php if ($question->allow_other_answer && $answer->is_other): ?>
 									<input type="textfield" name="<?php eko($question->id . ':other'); ?>" value="<?php eko($_POST[$question->id . ':other']); ?>"/> 
 								<?php endif; ?>

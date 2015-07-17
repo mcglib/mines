@@ -46,6 +46,12 @@
 	padding: 5px;
 }
 
+.survey .questions .question .question-notes {
+	border: thin solid blue;
+	margin: 5px;
+	padding: 5px;
+}
+
 .survey .questions .question .answers {
 	border: thin solid yellow;
 	margin: 5px;

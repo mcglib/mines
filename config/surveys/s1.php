@@ -18,7 +18,7 @@ return array(
 			s1q2_other varchar(1024),
 			s1q3 varchar(16),
 			s1q4 varchar(16),
-			s1q5 varchar(256),
+			s1q5 varchar(16),
 			url varchar(1024),
 			ip varchar(15),
 			user_agent varchar(1024),
@@ -66,16 +66,8 @@ return array(
 		's1q4' => function($value, $args){
 			return preg_match('/^s\d+q\d+a\d+$/', $value) ? '' : 'Invalid answer for question 4.';
 		},
-		's1q5' => function($values, $args){
-			if (!is_array($values)){
-				return 'Invalid answer for question 5.';
-			}
-			foreach ($values as $value){
-				if (!preg_match('/^s\d+q\d+a\d+$/', $value)){
-					return 'Invalid answer for question 5.';
-				}
-			}
-			return '';
+		's1q5' => function($value, $args){
+			return preg_match('/^s\d+q\d+a\d+$/', $value) ? '' : 'Invalid answer for question 5.';
 		},
 	),
 
@@ -107,7 +99,7 @@ return array(
 			return @$args['s1q4'];
 		},
 		's1q5' => function($args){
-			return implode(',', @$args['s1q5'] ?: array());
+			return @$args['s1q5'];
 		},
 		'url' => function($args){
 			return @$args['url'];
@@ -159,7 +151,7 @@ return array(
 			return $row->s1q4;
 		},
 		'Reason' => function($row){
-			return '"' . $row->s1q5 . '"';
+			return $row->s1q5;
 		},
 	),
 );
