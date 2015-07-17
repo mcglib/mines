@@ -10,7 +10,7 @@ if (!$survey) redirect_and_die($_REQUEST['url']);
 ?>
 <?php echo template_open(array(
 	'title' => 'Library Survey: Thank you!',
-	'css' => $conf['surveys'][$survey->id]['css'],
+	'css' => survey_config($survey->id, 'css'),
 	'head' => '<meta http-equiv="refresh" content="' . $survey->thanks_redirect_after_seconds . '; url=' . $_REQUEST['url'] . '"/>',
 )); ?>
 <div class="thank-you">

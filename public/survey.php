@@ -17,7 +17,7 @@ if ($actions['submit'] == @$_POST['submit']){
 	$messages = survey_submit($_REQUEST['id'], $_POST);
 
 	if (!count($messages)){
-		redirect_and_die($survey->show_thanks ? $_POST['url'] : 'thanks.php');
+		redirect_and_die(!$survey->show_thanks ? $_POST['url'] : "thanks.php?id={$_REQUEST['id']}&url={$_REQUEST['url']}");
 	} 
 }
 
@@ -29,7 +29,7 @@ if ($actions['cancel'] == @$_POST['cancel']){
 ?>
 <?php echo template_open(array(
 	'title' => 'Library Survey',
-	'css' => $conf['surveys'][$survey->id]['css'],
+	'css' => survey_config($survey->id, 'css'),
 )); ?>
 <script>
 	function display_other(select){

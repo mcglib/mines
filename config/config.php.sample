@@ -19,10 +19,14 @@ return array(
 			'user' => '<user>',
 			'pass' => '<pass>',
 		),
-		'schema' => include('schema.php'),
-		'surveys' => array(
-			's1' => include('surveys/s1.php'),
-		),
+		'schema' => function(){
+			return include('schema.php');
+		},
+		'surveys' => function(){
+			return array(
+				's1' => include('surveys/s1.php'),
+			);
+		},
 		'default-survey-id' => 's1',
 		'default-redirect-url' => 'http://www.mcgill.ca',
 	),
@@ -44,10 +48,14 @@ return array(
 			'user' => '<user>',
 			'pass' => '<pass>',
 		),
-		'schema' => include('schema.php'),
-		'surveys' => array(
-			's1' => include('surveys/s1.php'),
-		),
+		'schema' => function(){
+			return include('schema.php');
+		},
+		'surveys' => function(){
+			return array(
+				's1' => include('surveys/s1.php'),
+			);
+		},
 		'default-survey-id' => 's1',
 		'default-redirect-url' => 'http://www.mcgill.ca',
 	),

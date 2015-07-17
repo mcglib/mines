@@ -69,6 +69,28 @@ function config(){
 	return $GLOBALS[$key];
 }
 
+function schema_config($schema_key = null){
+	$key = globals_key(__FUNCTION__);
+	
+	if (!isset($GLOBALS[$key])){
+		$conf = config();
+		$GLOBALS[$key] = $conf['schema']();
+	}
+
+	return $key ? $GLOBALS[$key][$schema_key] : $GLOBALS[$key];
+}
+
+function survey_config($survey_id, $survey_key = null){
+	$key = globals_key(__FUNCTION__);
+	
+	if (!isset($GLOBALS[$key])){
+		$conf = config();
+		$GLOBALS[$key] = $conf['surveys']();
+	}
+
+	return $survey_key ? $GLOBALS[$key][$survey_id][$survey_key] : $GLOBALS[$key][$survey_id];
+}
+
 // Database
 function db(){
 	$key = globals_key(__FUNCTION__);
@@ -104,7 +126,7 @@ function db_row($sql, array $args){
 
 function survey($id){
 	$conf = config();
-	$sql = $conf['schema']['survey-select'];
+	$sql = schema_config('survey-select');
 	$args = array($id);
 
 	return db_row($sql, $args);
@@ -112,13 +134,13 @@ function survey($id){
 
 function survey_insert(array $args){
 	$conf = config();
-	$sql = $conf['schema']['survey-insert'];
+	$sql = schema_config('survey-insert');
 	db_exec($sql, $args);
 }
 
 function questions(stdClass $survey){
 	$conf = config();
-	$sql = $conf['schema']['survey_questions-select'];
+	$sql = schema_config('survey_questions-select');
 	$args = array($survey->id);
 
 	return db_rows($sql, $args);
@@ -126,13 +148,13 @@ function questions(stdClass $survey){
 
 function question_insert(array $args){
 	$conf = config();
-	$sql = $conf['schema']['survey_question-insert'];
+	$sql = schema_config('survey_question-insert');
 	db_exec($sql, $args);
 }
 
 function answers(stdClass $question){
 	$conf = config();
-	$sql = $conf['schema']['survey_answers-select'];
+	$sql = schema_config('survey_answers-select');
 	$args = array($question->id);
 
 	return db_rows($sql, $args);
@@ -140,7 +162,7 @@ function answers(stdClass $question){
 
 function answer_insert(array $args){
 	$conf = config();
-	$sql = $conf['schema']['survey_answer-insert'];
+	$sql = schema_config('survey_answer-insert');
 	db_exec($sql, $args);
 }
 
@@ -148,7 +170,7 @@ function survey_increment_count(stdClass $survey){
 	$survey->session_count++;
 
 	$conf = config();
-	$sql = $conf['schema']['survey-update-count'];
+	$sql = schema_config('survey-update-count');
 	$args = array($survey->session_count, $survey->id);
 
 	db_exec($sql, $args);
@@ -162,9 +184,9 @@ function survey_is_presentable(stdClass $survey){
 	return true;
 }
 
-function survey_submit($id, $args){
+function survey_submit($survey_id, $args){
 	$conf = config();
-	$def = $conf['surveys'][$id];
+	$def = survey_config($survey_id);
 
 	$messages = validate($args, $def['validators']);
 
@@ -266,7 +288,7 @@ function survey_import($file){
 // Web
 function template_open(array $parts){
 	if (!isset($parts['css'])) $parts['css'] = 'static/styles.css';
-	if (!isset($parts['refresh'])) $parts['refresh'] = '';
+	if (!isset($parts['head'])) $parts['head'] = '';
 
 	return <<<EOS
 <!DOCTYPE html>
@@ -274,7 +296,7 @@ function template_open(array $parts){
 	<head>
 		<title>{$parts['title']}</title>
 		<link rel="stylesheet" type="text/css" href="{$parts['css']}" />
-		{$parts['refresh']}
+		{$parts['head']}
 	</head>
 	<body>
 EOS;
