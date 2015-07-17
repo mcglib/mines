@@ -1,6 +1,6 @@
 #SURVEY												
 id	status_id	weight	name	notes	begin_date	end_date	session_count	threshold	force_completion	show_thanks	thanks_redirect_after_seconds	created_at	updated_at
-s1	A	1	MINES 2015	MINES for Libraries: Measuring the Impact of Networked Electronic Resources	2015-09-01	2015-12-31	0	5	1	1	5			
+s1	A	1	MINES 2015	MINES for Libraries: Measuring the Impact of Networked Electronic Resources	2015-06-01	2016-06-01	0	2	1	1	5			
 
 #QUESTIONS												
 id	survey_id	status_id	weight	question	notes	use_dropdown	allow_multiple_answers	allow_other_answer	created_at	updated_at		
