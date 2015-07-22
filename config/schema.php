@@ -8,7 +8,7 @@ return array(
 		);
 	",
 	'status-drop' => "
-		drop table status;
+		drop table if exists status;
 	",
 	'status-insert' => "
 		insert into status 
@@ -37,7 +37,7 @@ return array(
 		);
 	",
 	'survey-drop' => "
-		drop table survey;
+		drop table if exists ssurvey;
 	",
 	'survey-select' => "
 		select * from survey where id = ?
@@ -68,7 +68,7 @@ return array(
 		);
 	",
 	'survey_question-drop' => "
-		drop table survey_question;
+		drop table if exists ssurvey_question;
 	",
 	'survey_questions-select' => "
 		select * from survey_question where survey_id = ? order by weight
@@ -94,7 +94,7 @@ return array(
 		);
 	",
 	'survey_answer-drop' => "
-		drop table survey_answer;
+		drop table if exists ssurvey_answer;
 	",
 	'survey_answers-select' => "
 		select * from survey_answer where survey_question_id = ? order by weight
