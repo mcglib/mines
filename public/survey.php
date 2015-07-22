@@ -1,18 +1,23 @@
 <?php
 
+// Include the function library.
 require_once(__DIR__ . '/../scripts/inc.php');
 
+// Define page variables.
 $messages = array();
 $actions = array(
 	'submit' => 'Submit',
 	'cancel' => 'Not now, thanks!',
 );
 
+// Load the config array.
 $conf = config();
 
+// Get a survey.
 $survey = survey(@$_REQUEST['id']);
 if (!$survey) redirect_and_die($_REQUEST['url']);
 
+// Check for form submissions.
 if ($actions['submit'] == @$_POST['submit']){
 	$messages = survey_submit($_REQUEST['id'], $_POST);
 
@@ -21,6 +26,7 @@ if ($actions['submit'] == @$_POST['submit']){
 	} 
 }
 
+// Check for form cancellations.
 if ($actions['cancel'] == @$_POST['cancel']){
 	if (!$survey->force_completion){
 		redirect_and_die($_POST['url']);

@@ -1,9 +1,12 @@
 <?php
 
+// Include the function library.
 require_once(__DIR__ . '/../scripts/inc.php');
 
+// Load the config array.
 $conf = config();
 
+// Get a survey.
 $survey = survey(@$_REQUEST['id']);
 if (!$survey) redirect_and_die($_REQUEST['url']);
 
