@@ -2,6 +2,7 @@
 
 return array(
 	'<dev-hostname>' => array(
+		'production' => false,
 		'enabled' => true,
 		'begin_date' => '<begin_date>',
 		'end_date' => null,
@@ -31,6 +32,7 @@ return array(
 		'default-redirect-url' => 'http://www.mcgill.ca',
 	),
 	'<prod-hostname>' => array(
+		'production' => true,
 		'enabled' => true,
 		'begin_date' => '2015-07-01',
 		'end_date' => null,
