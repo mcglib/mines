@@ -7,7 +7,8 @@ return array(
 	// Custom CSS file.
 	'css' => 'static/styles.css',
 
-	// SQL statements for survey submissions
+	// Create statement for survey submissions table.
+	// Use the survey_id as the table name.
 	'create' => "
 		create table s1 (
 			id int auto_increment primary key,
@@ -26,19 +27,26 @@ return array(
 			updated_at datetime
 		);
 	",
+
+	// Drop statement statement for survey submissions table.
 	'drop' => "
 		drop table if exists s1
 	",
+
+	// Insert statement for survey submissions table.
 	'insert' => "
 		insert
 		into s1 (id, status_id, s1q1, s1q1_other, s1q2, s1q2_other, s1q3, s1q4, s1q5, url, ip, user_agent, created_at, updated_at)
 		values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 	",
+
+	// Select all statement for survey sumissions table.
 	'select' => "
 		select * from s1
 	",
 
 	// Define how each submitted form value should be validated.
+	// $value contains the argument being validated. $args contains all submitted arguments.
 	'validators' => array(
 		'id' => function($value, $args){
 			return preg_match('/^s\d+$/', $value) ? '' : 'Invalid id.';

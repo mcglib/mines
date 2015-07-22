@@ -1,64 +1,114 @@
 <?php
 
 return array(
-	'<dev-hostname>' => array(
+	// Specify the hostname as a key of the top level array.
+	// Use the `hostname` command to get the server's hostname.
+	'034-qa-web.library.mcgill.ca' => array(
+		// Is this produciton?
 		'production' => false,
+
+		// Should the survey system be enabled?
 		'enabled' => true,
-		'begin_date' => '<begin_date>',
+
+		// When should the survey be enabled? Null implies now.
+		'begin_date' => '2015-07-01',
+
+		// When should the survey be disabled. Null implies never.
 		'end_date' => null,
+
+		// List the people that should be contacted when something goes wrong.
 		'admins' => array(
 			'<email-address>',
 		),
+
+		// Configure what the exception email looks like.
 		'exception-email' => array(
 			'subject' => 'MINES Exception!',
 			'message' => "Please delete '%path' after resolving this exception.\n\n%exception",
 		),
+
+		// Notify admins only once for the same exception.
 		'exception-email-once' => false,
+
+		// Database connection details.
 		'dbms' => array(
 			'host' => '<host>',
 			'database' => '<database>',
 			'user' => '<user>',
 			'pass' => '<pass>',
 		),
+
+		// Definitely don't play with this.
 		'schema' => function(){
 			return include('schema.php');
 		},
+
+		// Define which surveys are enabled.
 		'surveys' => function(){
 			return array(
+				// survey_id => surveys/survey_id.php
 				's1' => include('surveys/s1.php'),
 			);
 		},
+
+		// Define a default survey, when calling public/index.php without a survey_id.
 		'default-survey-id' => 's1',
+
+		// Define a redirect url is incorrect.
 		'default-redirect-url' => 'http://www.mcgill.ca',
 	),
-	'<prod-hostname>' => array(
+	'034-web.library.mcgill.ca' => array(
+		// Is this produciton?
 		'production' => true,
+
+		// Should the survey system be enabled?
 		'enabled' => true,
+
+		// When should the survey be enabled? Null implies now.
 		'begin_date' => '2015-07-01',
+
+		// When should the survey be disabled. Null implies never.
 		'end_date' => null,
+
+		// List the people that should be contacted when something goes wrong.
+		'admins' => array(
+			'dev.library@mcgill.ca',
+		),
+
+		// Configure what the exception email looks like.
 		'exception-email' => array(
 			'subject' => 'MINES Exception!',
 			'message' => "Please delete '%path' after resolving this exception.\n\n%exception",
 		),
+
+		// Notify admins only once for the same exception.
 		'exception-email-once' => false,
-		'admins' => array(
-			'<email-address>',
-		),
+
+		// Database connection details.
 		'dbms' => array(
 			'host' => '<host>',
 			'database' => '<database>',
 			'user' => '<user>',
 			'pass' => '<pass>',
 		),
+
+		// Definitely don't play with this.
 		'schema' => function(){
 			return include('schema.php');
 		},
+
+		// Define which surveys are enabled.
 		'surveys' => function(){
 			return array(
+				// survey_id => surveys/survey_id.php
 				's1' => include('surveys/s1.php'),
 			);
 		},
+
+		// Define a default survey, when calling public/index.php without a survey_id.
 		'default-survey-id' => 's1',
+
+		// Define a redirect url is incorrect.
 		'default-redirect-url' => 'http://www.mcgill.ca',
 	),
 );
