@@ -1,5 +1,9 @@
 <?php
 
+// Bypass APC bug:
+// https://bugs.php.net/bug.php?id=58982//ini_set('apc.enabled', 0);
+ini_set('apc.ttl', 0);
+
 // Helpers
 set_error_handler(function($severity, $message, $file, $line){
     if (!(error_reporting() & $severity)) return; // This error code is not included in error_reporting
