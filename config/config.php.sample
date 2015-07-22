@@ -72,7 +72,7 @@ return array(
 
 		// List the people that should be contacted when something goes wrong.
 		'admins' => array(
-			'dev.library@mcgill.ca',
+			'<email-address>',
 		),
 
 		// Configure what the exception email looks like.
