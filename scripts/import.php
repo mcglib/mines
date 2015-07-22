@@ -4,7 +4,7 @@ require_once(__DIR__ . '/inc.php');
 
 // Check for survey id.
 if (count($argv) == 1){
-	echo "Usage: php scripts/import.php /full/path/to/s1.tsv\n\n";
+	echo "Usage: php import.php /full/path/to/s1.tsv\n\n";
 	die();	
 }
 
