@@ -14,23 +14,31 @@ set_error_handler(function($severity, $message, $file, $line){
 set_exception_handler(function($exception){
 	$conf = config();
 
-	$exception_path = "/tmp/mines-exception." . $exception->getCode();
+	if ($conf['production'] &&  !is_command_line()){
+		$exception_path = "/tmp/mines-exception." . $exception->getCode();
 
-	if ($conf['exception-email-once'] && file_exists($exception_path)) redirect_and_die(@$_REQUEST['url']);
+		if ($conf['exception-email-once'] && file_exists($exception_path)) redirect_and_die(@$_REQUEST['url']);
 
-	$to = implode(', ', $conf['admins']);
-	$subject = $conf['exception-email']['subject'];
-	$message = strtr($conf['exception-email']['message'], array(
-		'%path' => $exception_path,
-		'%exception' => $exception->__toString(),
-	));
+		$to = implode(', ', $conf['admins']);
+		$subject = $conf['exception-email']['subject'];
+		$message = strtr($conf['exception-email']['message'], array(
+			'%path' => $exception_path,
+			'%exception' => $exception->__toString(),
+		));
 
-	mail($to, $subject, $message);
+		mail($to, $subject, $message);
 
-	file_put_contents($exception_path, $message);
+		file_put_contents($exception_path, $message);
 
-	redirect_and_die(@$_REQUEST['url']);
+		redirect_and_die(@$_REQUEST['url']);
+	} else {
+		print_r($exception);
+	}
 });
+
+function is_command_line(){
+        return php_sapi_name() == "cli";
+}
 
 function globals_key($suffix){
 	$key = __DIR__ . '/' . __FILE__ . '.' . $suffix;
@@ -318,7 +326,7 @@ function eko($string){
 }
 
 function redirect_and_die($url){
-	header("location: $url");
+	if (!is_command_line()) header("location: $url");
 	die();
 }
 
