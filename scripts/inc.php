@@ -40,6 +40,8 @@ function is_command_line(){
         return php_sapi_name() == "cli";
 }
 
+// A function for returning a fairly complex key to be used with the $GLOBALS array.
+// A ludicrous attempt at avoiding collisions.
 function globals_key($suffix){
 	$key = __DIR__ . '/' . __FILE__ . '.' . $suffix;
 

@@ -6,7 +6,7 @@ $conf = config();
 
 // Let's protect ourselves from ourselves.
 $YES = 'YES';
-$question = "All existing MINES database will be permanently deleted during the install process.\n";
+$question = "All existing MINES database data will be permanently deleted during the install process.\n";
 $question .= "If you are sure, type '$YES' to continue: ";
 echo $question;
 
