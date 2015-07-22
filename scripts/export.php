@@ -8,5 +8,5 @@ if (count($argv) == 1){
 	die();	
 }
 
-survey_export($argv[1]);
+echo survey_export($argv[1]);
 
