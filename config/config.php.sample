@@ -3,17 +3,17 @@
 return array(
 	// Specify the hostname as a key of the top level array.
 	// Use the `hostname` command to get the server's hostname.
-	'034-qa-web.library.mcgill.ca' => array(
+	'dev-hostname' => array(
 		// Is this produciton?
 		'production' => false,
 
 		// Should the survey system be enabled?
 		'enabled' => true,
 
-		// When should the survey be enabled? Null implies now.
+		// When should the survey be enabled as YYYY-MM-DD. null implies now.
 		'begin_date' => '2015-07-01',
 
-		// When should the survey be disabled. Null implies never.
+		// When should the survey be disabled as YYYY-MM-DD. null implies never.
 		'end_date' => null,
 
 		// List the people that should be contacted when something goes wrong.
@@ -57,7 +57,7 @@ return array(
 		// Define a redirect url is incorrect.
 		'default-redirect-url' => 'http://www.mcgill.ca',
 	),
-	'034-web.library.mcgill.ca' => array(
+	'prod-hostname' => array(
 		// Is this produciton?
 		'production' => true,
 
