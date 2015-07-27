@@ -38,7 +38,9 @@ MINES survey integration with OCLC's hosted EZProxy.
 
 6. Install the survey system as follows. ```php scripts/install.php```
 
-7. Visit http://hostname/mines/index.php?id=s1&url=http://www.yahoo.com
+7. Visit http://hostname/mines?id=s1&url=http://www.yahoo.com
+
+8. Visiting http://hostname/mines?url=http://www.yahoo.com relies on the 'default-survey-id' value in config/config.php.
 
 # Adding a new survey
 
@@ -65,10 +67,14 @@ MINES survey integration with OCLC's hosted EZProxy.
 ```
 6. Finally, import the survey. ```php scripts/import.php s2```
 
-7. Visit http://hostname/mines/index.php?id=s2&url=http://www.yahoo.com
+7. Visit http://hostname/mines?id=s2&url=http://www.yahoo.com
 
 # Integration with OCLC's EZproxy
-[TBD]
+1. Copy config/survey.htm.sample to config/survey.htm.
+2. Edit the hostname in config/survey.htm to point to the correct hostname.
+3. Transfer config/survey.htm to scp.oclc.org:/expert/docs/survey.htm.
+4. Append "Banner survey.htm" to scp.oclc.org:/expert/shibuser.txt
+5. Append "ExcludeIPBanner survey.htm" to scp.oclc.org:/expert/docs/survey.htm
 
 # Creating an ARL report
 Type the following at the command line.
