@@ -37,7 +37,7 @@ return array(
 		);
 	",
 	'survey-drop' => "
-		drop table if exists ssurvey;
+		drop table if exists survey;
 	",
 	'survey-select' => "
 		select * from survey where id = ?
@@ -68,7 +68,7 @@ return array(
 		);
 	",
 	'survey_question-drop' => "
-		drop table if exists ssurvey_question;
+		drop table if exists survey_question;
 	",
 	'survey_questions-select' => "
 		select * from survey_question where survey_id = ? order by weight
@@ -94,7 +94,7 @@ return array(
 		);
 	",
 	'survey_answer-drop' => "
-		drop table if exists ssurvey_answer;
+		drop table if exists survey_answer;
 	",
 	'survey_answers-select' => "
 		select * from survey_answer where survey_question_id = ? order by weight
