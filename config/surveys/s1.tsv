@@ -7,8 +7,8 @@ id	survey_id	status_id	weight	question	notes	use_dropdown	allow_multiple_answers
 s1q1	s1	A	1	Are you a McGill University	(If you are using this resource on behalf of someone else please answer as if you were that person.)	1	0	1				
 s1q2	s1	A	2	Are you affiliated with		1	0	1				
 s1q3	s1	A	3	Your location		1	0	0				
-s1q4	s1	A	4	Primary purpose today	(select one)	0	0	0				
-s1q5	s1	A	5	Why did you choose this resource?	(select as many as apply)	1	0	0				
+s1q4	s1	A	4	Primary purpose today	(select one)	1	0	0				
+s1q5	s1	A	5	Why did you choose this resource?	(select as many as apply)	0	1	0				
 
 #ANSWERS												
 id	survey_question_id	status_id	weight	answer	notes	is_other	created_at	updated_at				
