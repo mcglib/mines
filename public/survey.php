@@ -41,7 +41,8 @@ if ($actions['cancel'] == @$_POST['cancel']){
 	function display_other(select){
 		var other_selected = select.options[select.selectedIndex].getAttribute("data-is_other") == '1';
 		if (select.form[select.name + ':other']){
-			select.form[select.name + ':other'].style.display = other_selected ? 'inline-block' : 'none';
+			var div = document.getElementById(select.name + ':other');
+			if (div) div.style.display = other_selected ? 'inline-block' : 'none';
 		}
 	}
 
@@ -98,7 +99,10 @@ if ($actions['cancel'] == @$_POST['cancel']){
 									<?php endforeach; ?>
 								</select>
 								<?php if ($question->allow_other_answer): ?>
-									<input style="display:none;" type="textfield" name="<?php eko($question->id . ':other'); ?>" value="<?php eko(@$_POST[$question->id . ':other']); ?>"/> 
+									<div id="<?php eko($question->id . ':other'); ?>" class="other-answer" style="display:none;">
+										Please specify: 
+										<input type="textfield" name="<?php eko($question->id . ':other'); ?>" value="<?php eko(@$_POST[$question->id . ':other']); ?>"/> 
+									</div>
 								<?php endif; ?>
 							<?php endif; ?>
 						<?php else: ?>
@@ -116,7 +120,10 @@ if ($actions['cancel'] == @$_POST['cancel']){
 									<?php eko($answer->answer); ?>
 								<?php endif; ?>
 								<?php if ($question->allow_other_answer && $answer->is_other): ?>
-									<input type="textfield" name="<?php eko($question->id . ':other'); ?>" value="<?php eko($_POST[$question->id . ':other']); ?>"/> 
+									<div id="<?php eko($question->id . ':other'); ?>" class="other-answer" style="display:none;">
+										Please specify: 
+										<input type="textfield" name="<?php eko($question->id . ':other'); ?>" value="<?php eko($_POST[$question->id . ':other']); ?>"/> 
+									</div>
 								<?php endif; ?>
 								<br/>
 							<?php endforeach; ?>
