@@ -73,7 +73,7 @@ return array(
 	'survey_question-drop' => "
 		drop table if exists survey_question;
 	",
-	'survey_question-select' => "
+	'survey_questions-select' => "
 		select * from survey_question where survey_id = ? order by weight
 	",
 	'survey_question-insert' => "
