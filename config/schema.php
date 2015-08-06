@@ -52,6 +52,9 @@ return array(
 	'survey-update-count' => "
 		update survey set session_count = ? where id = ?
 	",
+	'survey-delete' => "
+		delete from survey where id = ?
+	",
 	'survey_question-create' => "
 		create table if not exists survey_question (
 			id varchar(16) primary key,
@@ -70,7 +73,7 @@ return array(
 	'survey_question-drop' => "
 		drop table if exists survey_question;
 	",
-	'survey_questions-select' => "
+	'survey_question-select' => "
 		select * from survey_question where survey_id = ? order by weight
 	",
 	'survey_question-insert' => "
@@ -79,6 +82,9 @@ return array(
 		values
 			(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		;
+	",
+	'survey_question-delete' => "
+		delete from survey_question where survey_id = ?
 	",
 	'survey_answer-create' => "
 		create table if not exists survey_answer (
@@ -104,6 +110,9 @@ return array(
 			(id, survey_question_id, status_id, weight, answer, notes, is_other, created_at, updated_at)
 		values
 			(?, ?, ?, ?, ?, ?, ?, ?, ?)
+	",
+	'survey_answer-delete' => "
+		delete from survey_answer where survey_question_id in (select id from survey_question where survey_id = ?)
 	",
 );
 
