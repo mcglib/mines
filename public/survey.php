@@ -42,7 +42,7 @@ if ($actions['cancel'] == @$_POST['cancel']){
 		var other_selected = select.options[select.selectedIndex].getAttribute("data-is_other") == '1';
 		if (select.form[select.name + ':other']){
 			var div = document.getElementById(select.name + ':other');
-			if (div) div.style.display = other_selected ? 'inline-block' : 'none';
+			if (div) div.style.display = other_selected ? 'block' : 'none';
 		}
 	}
 
