@@ -30,7 +30,7 @@ MINES survey integration with OCLC's hosted EZProxy.
 ```git clone https://github.com/mcglib/mines.git```
 
 3. Create a symlink inside the webroot as follows.
-```ln -s destination/mines/public mines```
+```ln -s $non_webroot_destination/mines/public mines```
 
 4. Configure, the survey system by creating a config.php file. Start with a template. ```cp config/config.php.sample config/config.php```
 
