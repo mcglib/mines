@@ -57,6 +57,7 @@ if ($actions['cancel'] == @$_POST['cancel']){
 	<input type="hidden" name="id" value="<?php eko(@$_REQUEST['id']); ?>" />
 	<input type="hidden" name="url" value="<?php eko(@$_REQUEST['url']); ?>" />
 	<div class="survey">
+		<div class="survey-logo"></div>
 		<div class="survey-name">
 			<?php eko($survey->name); ?>
 		</div>
