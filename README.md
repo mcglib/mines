@@ -69,12 +69,13 @@ MINES survey integration with OCLC's hosted EZProxy.
 
 7. Visit http://hostname/mines?id=s2&url=http://www.yahoo.com
 
-# Integration with OCLC's EZproxy
-1. Copy config/survey.htm.sample to config/survey.htm.
-2. Edit the hostname in config/survey.htm to point to the correct hostname.
-3. Transfer config/survey.htm to scp.oclc.org:/expert/docs/survey.htm.
-4. Append "Banner survey.htm" to scp.oclc.org:/expert/shibuser.txt
-5. Append "ExcludeIPBanner survey.htm" to scp.oclc.org:/expert/docs/survey.htm
+# Integration with OCLC's EZproxy, using self-service
+1. Copy ezproxy/expert/docs/survey.htm.sample to ezproxy/expert/docs/survey.htm.
+2. Edit the hostname in ezproxy/expert/docs/survey.htm.
+3. Transfer ezproxy/expert/docs/survey.htm to scp.oclc.org:expert/docs/survey.htm.
+4. Transfer ezproxy/expert/survey.txt to scp.oclc.org:expert/survey.txt.
+5. Transfer ezproxy/expert/surveyshib.txt to scp.oclc.org:expert/surveyshib.txt.
+6. Append the contents of ezproxy/expert/ezproxy.cfg.sample to scp.oclc.org:expert/ezproxy.cfg
 
 # Creating an ARL report
 Type the following at the command line.
