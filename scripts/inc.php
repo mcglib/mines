@@ -1,8 +1,7 @@
 <?php
 
-// Bypass APC bug:
-// https://bugs.php.net/bug.php?id=58982//ini_set('apc.enabled', 0);
-ini_set('apc.ttl', 0);
+// Bypass APC bug: https://bugs.php.net/bug.php?id=58982
+ini_set('apc.cache_by_default', 0);
 
 // Helpers
 set_error_handler(function($severity, $message, $file, $line){
@@ -12,27 +11,31 @@ set_error_handler(function($severity, $message, $file, $line){
 });
 
 set_exception_handler(function($exception){
-	$conf = config();
+	try {
+		$conf = config();
 
-	if ($conf['production'] &&  !is_command_line()){
-		$exception_path = "/tmp/mines-exception." . $exception->getCode();
+		if ($conf['production'] &&  !is_command_line()){
+			$exception_path = "/tmp/mines-exception." . $exception->getCode();
 
-		if ($conf['exception-email-once'] && file_exists($exception_path)) redirect_and_die(@$_REQUEST['url']);
+			if ($conf['exception-email-once'] && file_exists($exception_path)) redirect_and_die(@$_REQUEST['url']);
 
-		$to = implode(', ', $conf['admins']);
-		$subject = $conf['exception-email']['subject'];
-		$message = strtr($conf['exception-email']['message'], array(
-			'%path' => $exception_path,
-			'%exception' => $exception->__toString(),
-		));
+			$to = implode(', ', $conf['admins']);
+			$subject = $conf['exception-email']['subject'];
+			$message = strtr($conf['exception-email']['message'], array(
+				'%path' => $exception_path,
+				'%exception' => $exception->__toString(),
+			));
 
-		mail($to, $subject, $message);
+			mail($to, $subject, $message);
 
-		file_put_contents($exception_path, $message);
+			file_put_contents($exception_path, $message);
 
-		redirect_and_die(@$_REQUEST['url']);
-	} else {
-		print_r($exception);
+			redirect_and_die(@$_REQUEST['url']);
+		} else {
+			print_r($exception);
+		}
+	} catch (Exception $e){
+		echo 'Sorry, something went wrong.';
 	}
 });
 
