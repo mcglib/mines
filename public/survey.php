@@ -59,10 +59,10 @@ if ($actions['cancel'] == @$_POST['cancel']){
 	<div class="survey">
 		<div class="survey-logo"></div>
 		<div class="survey-name">
-			<?php eko($survey->name); ?>
+			<?php echo $survey->name; ?>
 		</div>
 		<div class="survey-notes">
-			<?php eko($survey->notes); ?>
+			<?php echo $survey->notes; ?>
 		</div>
 		<?php if (count($messages)): ?>
 			<div class="messages">
@@ -77,32 +77,32 @@ if ($actions['cancel'] == @$_POST['cancel']){
 			<?php foreach (questions($survey) as $question): ?>
 				<div class="question">
 					<div class="question-text">
-						<?php eko($question->question); ?>:
+						<?php echo $question->question; ?>:
 					</div>
 					<div class="question-notes">
-						<?php eko($question->notes); ?>
+						<?php echo $question->notes; ?>
 					</div>
 					<div class="answers">
 						<?php if ($question->use_dropdown): ?>
 							<?php if ($question->allow_multiple_answers): ?>
-								<select name="<?php eko($question->id); ?>" multiple>
+								<select name="<?php echo $question->id; ?>" multiple>
 									<?php foreach (answers($question) as $i => $answer): ?>
 										<?php $checked = in_array($answer->id, @$_REQUEST[$question->id] ?: array()) ; ?>
-										<option value="<?php eko($answer->id); ?>" data-is_other="<?php echo $answer->is_other; ?>"<?php eko($checked ? ' selected' : ''); ?>><?php eko($answer->answer); ?></option>
+										<option value="<?php echo $answer->id; ?>" data-is_other="<?php echo $answer->is_other; ?>"<?php echo $checked ? ' selected' : ''; ?>><?php echo $answer->answer; ?></option>
 									<?php endforeach; ?>
 								</select>
 							<?php else: ?>
-								<select name="<?php eko($question->id); ?>"<?php echo $question->allow_other_answer ? ' onchange="display_other(this);"' : ''; ?>>
+								<select name="<?php echo $question->id; ?>"<?php echo $question->allow_other_answer ? ' onchange="display_other(this);"' : ''; ?>>
 									<option value="" data-is_other="0"></option>
 									<?php foreach (answers($question) as $i => $answer): ?>
 										<?php $checked = @$_POST[$question->id] == $answer->id; ?>
-										<option value="<?php eko($answer->id); ?>" data-is_other="<?php echo $answer->is_other; ?>"<?php eko($checked ? ' selected' : ''); ?>><?php eko($answer->answer); ?></option>
+										<option value="<?php echo $answer->id; ?>" data-is_other="<?php echo $answer->is_other; ?>"<?php echo $checked ? ' selected' : ''; ?>><?php echo $answer->answer; ?></option>
 									<?php endforeach; ?>
 								</select>
 								<?php if ($question->allow_other_answer): ?>
-									<div id="<?php eko($question->id . ':other'); ?>" class="other-answer" style="display:none;">
+									<div id="<?php echo $question->id . ':other'; ?>" class="other-answer" style="display:none;">
 										Please specify: 
-										<input type="textfield" name="<?php eko($question->id . ':other'); ?>" value="<?php eko(@$_POST[$question->id . ':other']); ?>"/> 
+										<input type="textfield" name="<?php echo $question->id . ':other'; ?>" value="<?php eko(@$_POST[$question->id . ':other']); ?>"/> 
 									</div>
 								<?php endif; ?>
 							<?php endif; ?>
@@ -110,20 +110,20 @@ if ($actions['cancel'] == @$_POST['cancel']){
 							<?php foreach (answers($question) as $answer): ?>
 								<?php if ($question->allow_multiple_answers): ?>
 									<?php $checked = in_array($answer->id, @$_REQUEST[$question->id] ?: array()) ; ?>
-									<input type="checkbox" name="<?php eko($question->id); ?>[]" value="<?php eko($answer->id); ?>"<?php eko($checked ? ' checked' : ''); ?>>
+									<input type="checkbox" name="<?php echo $question->id; ?>[]" value="<?php echo $answer->id; ?>"<?php echo $checked ? ' checked' : ''; ?>>
 								<?php else: ?>
 									<?php $checked = @$_POST[$question->id] == $answer->id; ?>
-									<input type="radio" name="<?php eko($question->id); ?>" value="<?php eko($answer->id); ?>"<?php eko($checked ? ' checked' : ''); ?>>
+									<input type="radio" name="<?php echo $question->id; ?>" value="<?php echo $answer->id; ?>"<?php echo $checked ? ' checked' : ''; ?>>
 								<?php endif; ?>
 								<?php if ($answer->notes): ?>
-									<a href='javascript:alert("<?php str_replace("\"", "'", eko($answer->notes)); ?>");'><?php eko($answer->answer); ?></a>
+									<a href='javascript:alert("<?php echo str_replace("\"", "'", $answer->notes); ?>");'><?php echo $answer->answer; ?></a>
 								<?php else: ?>
-									<?php eko($answer->answer); ?>
+									<?php echo $answer->answer; ?>
 								<?php endif; ?>
 								<?php if ($question->allow_other_answer && $answer->is_other): ?>
-									<div id="<?php eko($question->id . ':other'); ?>" class="other-answer" style="display:none;">
+									<div id="<?php echo $question->id . ':other'; ?>" class="other-answer" style="display:none;">
 										Please specify: 
-										<input type="textfield" name="<?php eko($question->id . ':other'); ?>" value="<?php eko($_POST[$question->id . ':other']); ?>"/> 
+										<input type="textfield" name="<?php echo $question->id . ':other'; ?>" value="<?php eko($_POST[$question->id . ':other']); ?>"/> 
 									</div>
 								<?php endif; ?>
 								<br/>
@@ -135,9 +135,9 @@ if ($actions['cancel'] == @$_POST['cancel']){
 		</div>
 	</div>
 	<div class="controls">
-		<input type="submit" name="submit" value="<?php eko($actions['submit']); ?>" />
+		<input type="submit" name="submit" value="<?php echo $actions['submit']; ?>" />
 		<?php if (!$survey->force_completion): ?>
-			<input type="submit" name="cancel" value="<?php eko($actions['cancel']); ?>" />
+			<input type="submit" name="cancel" value="<?php echo $actions['cancel']; ?>" />
 		<?php endif; ?>
 	</div>
 </form>
