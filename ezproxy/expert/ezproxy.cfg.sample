@@ -1,4 +1,4 @@
-# Append these lines to ezproxy.cfg
+# Under "IncludeIP 0.0.0.0-255.255.255.255", append the following lines.
 IncludeFile survey.txt
 IncludeFile surveyshib.txt
 
