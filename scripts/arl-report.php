@@ -15,8 +15,11 @@ $survey_id = $argv[1];
 // Get field definitions.
 $fields = survey_config($survey_id, 'arl-export');
 
+// Open a file handle.
+$output = fopen("php://output", 'w');
+
 // Print header.
-echo implode(",", array_keys($fields)) . "\n";
+fputcsv($output, array_keys($fields));
 
 // Loop on each row.
 foreach (survey_submissions($survey_id) as $survey_submission){
@@ -26,7 +29,8 @@ foreach (survey_submissions($survey_id) as $survey_submission){
 	foreach ($fields as $name => $callback){
 		$row[] = $callback($survey_submission);
 	}
-	echo implode(",", $row) . "\n";
+
+	fputcsv($output, $row);
 }
 echo "\n";
 
