@@ -54,8 +54,12 @@ return array(
 		// Define a default survey, when calling public/index.php without a survey_id.
 		'default-survey-id' => 's1',
 
-		// Define a redirect url is incorrect.
+		// Define a redirect url if incorrect.
 		'default-redirect-url' => 'http://www.mcgill.ca',
+
+		// Define whether the survey should be forced to display using an uppercase HTTP hack.
+		// This url http://proxy-server.com?url=HTTP://... will force the survey to display without counting a session.
+		'enable-force-survey' => true,
 	),
 	'prod-hostname' => array(
 		// Is this produciton?
@@ -108,8 +112,12 @@ return array(
 		// Define a default survey, when calling public/index.php without a survey_id.
 		'default-survey-id' => 's1',
 
-		// Define a redirect url is incorrect.
+		// Define a redirect url if incorrect.
 		'default-redirect-url' => 'http://www.mcgill.ca',
+
+		// Define whether the survey should be forced to display using an uppercase HTTP hack.
+		// This url http://proxy-server.com?url=HTTP://... will force the survey to display without counting a session.
+		'enable-force-survey' => true,
 	),
 );
 
