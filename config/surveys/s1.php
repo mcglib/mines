@@ -152,25 +152,30 @@ return array(
 			return $row->user_agent;
 		},
 		'UserGroup' => function($row){
-			return $row->s1q1;
+			return preg_filter('/s\d+q\d+a(\d+)/', '\1', $row->s1q1);
+			//return $row->s1q1;
 		},
 		'UserGroupOtherText' => function($row){
 			return $row->s1q1_other;
 		},
 		'Affiliation' => function($row){
-			return $row->s1q2;
+			return preg_filter('/s\d+q\d+a(\d+)/', '\1', $row->s1q2);
+			//return $row->s1q2;
 		},
 		'AffiliationOtherText' => function($row){
 			return $row->s1q2_other;
 		},
 		'Location' => function($row){
-			return $row->s1q3;
+			return preg_filter('/s\d+q\d+a(\d+)/', '\1', $row->s1q3);
+			//return $row->s1q3;
 		},
 		'Purpose' => function($row){
-			return $row->s1q4;
+			return preg_filter('/s\d+q\d+a(\d+)/', '\1', $row->s1q4);
+			//return $row->s1q4;
 		},
 		'Reason' => function($row){
-			return $row->s1q5;
+			return preg_filter('/s\d+q\d+a(\d+)/', '\1', $row->s1q5);
+			//return $row->s1q5;
 		},
 	),
 );
