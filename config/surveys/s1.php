@@ -58,14 +58,14 @@ return array(
 			return preg_match('/^s\d+q\d+a\d+$/', $value) ? '' : 'Invalid answer for question 1.';
 		},
 		's1q1:other' => function($value, $args){
-			if (@$args['s1q1'] != 's1q1a9') return '';
+			if (@$args['s1q1'] != 's1q1a7') return '';
 			return $value != '' ? '' : 'Please specify an other answer for question 1.';
 		},
 		's1q2' => function($value, $args){
 			return preg_match('/^s\d+q\d+a\d+$/', $value) ? '' : 'Invalid answer for question 2.';
 		},
 		's1q2:other' => function($value, $args){
-			if (@$args['s1q2'] != 's1q2a15') return '';
+			if (@$args['s1q2'] != 's1q2a16') return '';
 			return $value != '' ? '' : 'Please specify an other answer for question 2.';
 		},
 		's1q3' => function($value, $args){
