@@ -139,6 +139,9 @@ return array(
 
 	// Define how each field is mapped to ARL report requirements
 	'arl-export' => array(
+		'ID' => function($row){
+			return $row->id;
+		},
 		'TimeCreated' => function($row){
 			return $row->created_at;
 		},
