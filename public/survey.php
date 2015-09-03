@@ -22,7 +22,7 @@ if ($actions['submit'] == @$_POST['submit']){
 	$messages = survey_submit($_REQUEST['id'], $_POST);
 
 	if (!count($messages)){
-		redirect_and_die(!$survey->show_thanks ? $_POST['url'] : "thanks.php?id={$_REQUEST['id']}&url={$_REQUEST['url']}");
+		redirect_and_die(!$survey->show_thanks ? $_POST['url'] : "thanks.php?id={$_REQUEST['id']}&url=" . urlencode($_REQUEST['url']));
 	} 
 }
 
