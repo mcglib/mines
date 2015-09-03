@@ -15,7 +15,7 @@ if ($conf['enable-force-survey']){
 	// We are relying on this obscure hack in order to leave the request URL undisturbed.
 	$force_survey = strpos($url, 'HTTP') === 0 ? true : false;
 	if ($force_survey){
-		redirect_and_die("survey.php?id=$survey_id&url=$url");
+		redirect_and_die("survey.php?id=$survey_id&url=" . urlencode($url));
 	}
 }
 
@@ -30,7 +30,7 @@ survey_increment_count($survey);
 
 // Is it time to present this survey?
 if (survey_is_presentable($survey)){
-	redirect_and_die("survey.php?id=$survey_id&url=$url");
+	redirect_and_die("survey.php?id=$survey_id&url=" . urlencode($url));
 }
 
 // If we reach this point, redirect to the e-resource.
