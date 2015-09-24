@@ -29,12 +29,12 @@ $LAST_REPORT_FILE_PATH = __DIR__ . '/../tmp/last-status.txt';
 
 // Report
 $current_report = <<<EOS
-Status Date and Time: 	{$date}
-Survey: 		{$survey->id}
-Active: 		{$survey->begin_date} to {$survey->end_date}
-Sessions: 		{$survey->session_count}
-Threshold: 		{$survey->threshold}
-Submissions: 		{$submission_count}
+Status Date and Time: {$date}
+Survey: {$survey->id}
+Active: {$survey->begin_date} to {$survey->end_date}
+Sessions: {$survey->session_count}
+Threshold: {$survey->threshold}
+Submissions: {$submission_count}
 Sessions / Submissions: {$sessions_per_submissions}
 EOS;
 
