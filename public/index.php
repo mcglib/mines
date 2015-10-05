@@ -25,6 +25,9 @@ if (!$conf['enabled'] || !today_is_between($conf['begin_date'], $conf['end_date'
 // Get a survey.
 $survey = survey($survey_id);
 
+// No survey? Redirect to default.
+if (!$survey) redirect_and_die($conf['default-redirect-url']);
+
 // Increment the survey's count.
 survey_increment_count($survey);
 
