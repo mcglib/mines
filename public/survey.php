@@ -15,6 +15,8 @@ $conf = config();
 
 // Get a survey.
 $survey = survey(@$_REQUEST['id']);
+
+if (!@$_REQUEST['url']) redirect_and_die($conf['default-redirect-url']);
 if (!$survey) redirect_and_die($_REQUEST['url']);
 
 // Check for form submissions.
