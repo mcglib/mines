@@ -6,6 +6,9 @@ require_once(__DIR__ . '/../scripts/inc.php');
 // Load the config array.
 $conf = config();
 
+// Check if URL exists.
+if (!isset($_REQUEST['url'])) redirect_and_die($conf['default-redirect-url']);
+
 // Get a survey.
 $survey = survey(@$_REQUEST['id']);
 if (!$survey) redirect_and_die($_REQUEST['url']);
