@@ -11,6 +11,7 @@ if (count($argv) == 1){
 
 // Prepare arguments.
 $survey_id = $argv[1];
+$update_last = 'y' == @strtolower(@$argv[2]) ? true : false;
 
 // Get a survey.
 $survey = survey($survey_id);
@@ -44,7 +45,7 @@ if (file_exists($LAST_REPORT_FILE_PATH)){
 }
 
 // Write the current report to $LAST_STATUS_FILE_PATH.
-file_put_contents($LAST_REPORT_FILE_PATH, $current_report);
+if ($update_last) file_put_contents($LAST_REPORT_FILE_PATH, $current_report);
 
 echo <<<EOS
 *CURRENT REPORT*
